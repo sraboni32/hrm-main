@@ -1,0 +1,167 @@
+/* Logo Styles for Better Display and Clarity */
+
+/* Main Header Logo */
+.main-header .logo {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    height: 60px;
+    background: transparent;
+}
+
+.main-header .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    outline: none;
+}
+
+.main-header .logo-img {
+    max-height: 45px;
+    max-width: 180px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    /* Enhanced image rendering for clarity */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Improved contrast and sharpness */
+    filter: contrast(1.15) brightness(1.02) saturate(1.05);
+    /* Smooth transitions */
+    transition: all 0.3s ease;
+    /* Remove any default styling */
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+/* Mobile Sidebar Logo */
+.mobile-sidebar-header .logo {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-sidebar-header .mobile-logo {
+    max-height: 30px;
+    max-width: 120px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-header .logo {
+        padding: 0.25rem 0.5rem;
+        height: 50px;
+    }
+
+    .main-header .logo-img {
+        max-height: 35px;
+        max-width: 140px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-header .logo {
+        padding: 0.25rem;
+        height: 45px;
+    }
+
+    .main-header .logo-img {
+        max-height: 30px;
+        max-width: 120px;
+    }
+}
+
+/* High DPI Display Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .logo-img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .logo-img {
+        filter: contrast(1.1) brightness(1.1);
+    }
+}
+
+/* Hover Effects */
+.logo-link:hover .logo-img {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+}
+
+.logo-link {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.logo-link:hover {
+    opacity: 0.9;
+    text-decoration: none;
+}
+
+/* Loading State */
+.logo-img {
+    background-color: transparent;
+    transition: opacity 0.3s ease-in-out;
+    /* Prevent layout shift during loading */
+    min-height: 30px;
+    min-width: 80px;
+}
+
+.logo-img:not([src]) {
+    opacity: 0;
+}
+
+/* Fallback for broken images */
+.logo-img::before {
+    content: "Onchain";
+    display: inline-block;
+    color: #8b5cf6;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Lazy loading support */
+.logo-img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.logo-img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* Focus states for accessibility */
+.logo-link:focus {
+    outline: 2px solid #8b5cf6;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.logo-link:focus .logo-img {
+    transform: scale(1.05);
+}
+
+/* Print Styles */
+@media print {
+    .logo-img {
+        max-height: 40px;
+        filter: none;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+    }
+}

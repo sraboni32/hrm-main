@@ -1,0 +1,14 @@
+Title,Summary,Company Name,Project Name,Assigned Employee,Start Date,End Date,Status,Progress,Priority
+Create user authentication system,Implement login and registration functionality,Tech Corp,Website Redesign,john.doe,2024-01-15,2024-01-30,not_started,0,high
+Design database schema,Create tables for user management,Tech Corp,Website Redesign,jane.smith,2024-01-16,2024-01-25,progress,25,medium
+Create user authentication system,Duplicate title test - this should be skipped,Tech Corp,Website Redesign,john.doe,2024-01-15,2024-01-30,not_started,0,high
+Invalid Task - Missing Company,Missing company field,,Website Redesign,john.doe,2024-01-15,2024-01-30,not_started,0,high
+Date Format Error,Test invalid date format,Tech Corp,Website Redesign,john.doe,15-01-2024,30-01-2024,not_started,0,high
+Invalid Status,Test invalid status value,Tech Corp,Website Redesign,john.doe,2024-01-15,2024-01-30,invalid_status,0,high
+Invalid Progress,Test invalid progress value,Tech Corp,Website Redesign,john.doe,2024-01-15,2024-01-30,not_started,150,high
+Invalid Priority,Test invalid priority value,Tech Corp,Website Redesign,john.doe,2024-01-15,2024-01-30,not_started,0,invalid_priority
+Missing Summary,,Tech Corp,Website Redesign,john.doe,2024-01-15,2024-01-30,not_started,0,high
+Title Too Long - This title is way too long and exceeds the maximum character limit of 192 characters which should trigger a validation error when importing this task into the system because it violates the database constraints,Valid summary,Tech Corp,Website Redesign,john.doe,2024-01-15,2024-01-30,not_started,0,high
+Date Logic Error,End date before start date,Tech Corp,Website Redesign,john.doe,2024-01-30,2024-01-15,not_started,0,high
+Non-existent Company,Test with fake company,Fake Company Ltd,Website Redesign,john.doe,2024-01-15,2024-01-30,not_started,0,high
+Non-existent Employee,Test with fake employee,Tech Corp,Website Redesign,fake.employee,2024-01-15,2024-01-30,not_started,0,high

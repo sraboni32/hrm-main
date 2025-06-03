@@ -1,0 +1,14 @@
+Title,Summary,Company Name,Client Username,Start Date,End Date,Priority,Status,Description,Progress
+Website Redesign Project,Complete redesign of company website with modern UI/UX,Tech Corp,john.client,2024-01-15,2024-03-30,high,not_started,Full website redesign including responsive design and SEO optimization,0
+Mobile App Development,Develop cross-platform mobile application,Tech Corp,jane.client,2024-02-01,2024-06-15,urgent,progress,Native mobile app for iOS and Android platforms,25
+Website Redesign Project,Duplicate title test - this should be skipped,Tech Corp,john.client,2024-01-15,2024-03-30,high,not_started,Description here,0
+Invalid Project - Missing Title,,Complete summary here,Tech Corp,john.client,2024-01-15,2024-03-30,high,not_started,Description here,0
+Missing Summary,Missing summary field,Tech Corp,john.client,2024-01-15,2024-03-30,high,not_started,Description here,0
+Invalid Company,Valid summary here,Fake Company Ltd,john.client,2024-01-15,2024-03-30,high,not_started,Description here,0
+Invalid Client,Valid summary here,Tech Corp,fake.client,2024-01-15,2024-03-30,high,not_started,Description here,0
+Date Format Error,Test invalid date format,Tech Corp,john.client,15-01-2024,30-03-2024,high,not_started,Description here,0
+Invalid Status,Test invalid status value,Tech Corp,john.client,2024-01-15,2024-03-30,high,invalid_status,Description here,0
+Invalid Priority,Test invalid priority value,Tech Corp,john.client,2024-01-15,2024-03-30,invalid_priority,not_started,Description here,0
+Invalid Progress,Test invalid progress value,Tech Corp,john.client,2024-01-15,2024-03-30,high,not_started,Description here,150
+Date Logic Error,End date before start date,Tech Corp,john.client,2024-03-30,2024-01-15,high,not_started,Description here,0
+Title Too Long - This title is way too long and exceeds the maximum character limit of 255 characters which should trigger a validation error when importing this project into the system because it violates the database constraints and will cause the import to fail,Valid summary,Tech Corp,john.client,2024-01-15,2024-03-30,high,not_started,Description here,0

@@ -1,0 +1,4 @@
+Title,Summary,Company Name,Project Name,Assigned Employee,Start Date,End Date,Status,Progress,Priority
+Test Task with Zero Progress,This task should import with 0 progress,Tech Corp,Website Redesign,john.doe,2024-01-15,2024-01-30,not_started,0,high
+Test Task with 25 Progress,This task should import with 25 progress,Tech Corp,Website Redesign,john.doe,2024-01-16,2024-01-31,progress,25,medium
+Test Task with Empty Progress,This task has empty progress field,Tech Corp,Website Redesign,john.doe,2024-01-17,2024-02-01,not_started,,low
