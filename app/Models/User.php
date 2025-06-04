@@ -63,4 +63,30 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\AiChatConversation::class);
     }
+
+    // Chat relationships
+    public function chatRoomMemberships()
+    {
+        return $this->hasMany(\App\Models\ChatRoomMember::class);
+    }
+
+    public function chatRooms()
+    {
+        return $this->belongsToMany(\App\Models\ChatRoom::class, 'chat_room_members');
+    }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(\App\Models\ChatMessage::class, 'sender_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany(\App\Models\ChatMessage::class, 'receiver_id');
+    }
+
+    public function createdChatRooms()
+    {
+        return $this->hasMany(\App\Models\ChatRoom::class, 'created_by');
+    }
 }

@@ -105,6 +105,16 @@
                 </li>
             @endcanany
 
+            <!-- Real-time Chat - Available for all authenticated users -->
+            <li class="nav-item {{ request()->is('chat*') ? 'active' : '' }}">
+                <a class="nav-item-hold" href="{{ route('chat.index') }}">
+                    <i class="nav-icon i-Speach-Bubble-6"></i>
+                    <span class="nav-text">{{ __('Real-time Chat') }}</span>
+                    <span id="chat-unread-badge" class="badge badge-danger ml-2" style="display: none;">0</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+
             <!-- AI Chat - Available for super admin only -->
             @if (auth()->user()->role_users_id == 1)
                 <li class="nav-item {{ request()->is('ai-chat*') ? 'active' : '' }}">

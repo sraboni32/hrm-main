@@ -16,10 +16,18 @@ class AddApprovalFieldsToSalaryDisbursementsTable extends Migration
     {
         Schema::table('salary_disbursements', function (Blueprint $table) {
             // Add approval workflow fields
-            $table->unsignedInteger('approved_by')->nullable()->after('reviewed_by');
-            $table->timestamp('approved_at')->nullable()->after('approved_by');
-            $table->unsignedInteger('paid_by')->nullable()->after('approved_at');
-            $table->timestamp('paid_at')->nullable()->after('paid_by');
+            if (!Schema::hasColumn('salary_disbursements', 'approved_by')) {
+                $table->unsignedInteger('approved_by')->nullable()->after('reviewed_by');
+            }
+            if (!Schema::hasColumn('salary_disbursements', 'approved_at')) {
+                $table->timestamp('approved_at')->nullable()->after('approved_by');
+            }
+            if (!Schema::hasColumn('salary_disbursements', 'paid_by')) {
+                $table->unsignedInteger('paid_by')->nullable()->after('approved_at');
+            }
+            if (!Schema::hasColumn('salary_disbursements', 'paid_at')) {
+                $table->timestamp('paid_at')->nullable()->after('paid_by');
+            }
         });
 
         // Update the enum separately using raw SQL to avoid Doctrine issues

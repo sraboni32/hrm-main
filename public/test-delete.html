@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Test Room Deletion</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Test Room Deletion</h1>
+    <button onclick="testDelete()">Delete Room ID 3</button>
+    <div id="result"></div>
+
+    <script>
+        // Set up axios defaults
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        
+        function testDelete() {
+            console.log('Testing room deletion...');
+            
+            // Get CSRF token
+            const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+            
+            const config = {
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            };
+            
+            axios.delete('/chat/room/3/delete', config)
+                .then(response => {
+                    console.log('Success:', response.data);
+                    document.getElementById('result').innerHTML = '<p style="color: green;">Success: ' + JSON.stringify(response.data) + '</p>';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('result').innerHTML = '<p style="color: red;">Error: ' + JSON.stringify(error.response?.data || error.message) + '</p>';
+                });
+        }
+    </script>
+</body>
+</html>

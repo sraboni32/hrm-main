@@ -14,8 +14,12 @@ class AddKpiFieldsToEmployeesTable extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->string('mode', 32)->nullable()->after('employment_type');
-            $table->decimal('expected_hours', 5, 2)->nullable()->after('mode');
+            if (!Schema::hasColumn('employees', 'mode')) {
+                $table->string('mode', 32)->nullable()->after('employment_type');
+            }
+            if (!Schema::hasColumn('employees', 'expected_hours')) {
+                $table->decimal('expected_hours', 5, 2)->nullable()->after('mode');
+            }
         });
     }
 
@@ -27,7 +31,12 @@ class AddKpiFieldsToEmployeesTable extends Migration
     public function down()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->dropColumn(['mode', 'expected_hours']);
+            if (Schema::hasColumn('employees', 'mode')) {
+                $table->dropColumn('mode');
+            }
+            if (Schema::hasColumn('employees', 'expected_hours')) {
+                $table->dropColumn('expected_hours');
+            }
         });
     }
 } 

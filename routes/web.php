@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\SalaryDisbursementController;
-//I am coming
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,7 +163,6 @@ if ($installed === true) {
                 //--------------------------------------------------------------------\\
                 Route::resource('policies', 'PoliciesController');
                 Route::post("policies/delete/by_selection", "PoliciesController@delete_by_selection");
-
 
                 //------------------------------- announcements ---------------------\\
                 //--------------------------------------------------------------------\\
@@ -479,6 +479,63 @@ if ($installed === true) {
             //----------------------------------------------------------------\\
             Route::put('updateProfile/{id}', 'ProfileController@updateProfile');
             Route::resource('profile', 'ProfileController');
+
+            //------------------------------- Real-time Chat --------------------------\\
+            //----------------------------------------------------------------\\
+
+            Route::prefix('chat')->group(function () {
+                Route::get('/', 'ChatController@index')->name('chat.index');
+
+                // Room messages
+                Route::get('/room/{roomId}/messages', 'ChatController@getRoomMessages')->name('chat.room.messages');
+                Route::post('/room/{roomId}/send', 'ChatController@sendRoomMessage')->name('chat.room.send');
+                Route::post('/room/create', 'ChatController@createRoom')->name('chat.room.create');
+                Route::post('/room/{roomId}/join', 'ChatController@joinRoom')->name('chat.room.join');
+                Route::post('/room/{roomId}/leave', 'ChatController@leaveRoom')->name('chat.room.leave');
+                Route::get('/room/{roomId}/details', 'ChatController@getRoomDetails')->name('chat.room.details');
+                Route::delete('/room/{roomId}/delete', 'ChatController@deleteRoom')->name('chat.room.delete');
+
+                // Direct messages
+                Route::get('/direct/{userId}/messages', 'ChatController@getDirectMessages')->name('chat.direct.messages');
+                Route::post('/direct/{userId}/send', 'ChatController@sendDirectMessage')->name('chat.direct.send');
+
+                // Utility routes
+                Route::get('/unread-count', 'ChatController@getUnreadCount')->name('chat.unread.count');
+                Route::post('/mark-read', 'ChatController@markAsRead')->name('chat.mark.read');
+                Route::post('/typing', 'ChatController@typing')->name('chat.typing');
+                Route::get('/download/{fileId}', 'ChatController@downloadFile')->name('chat.download.file');
+
+                // Test route for debugging
+                Route::get('/test-delete/{roomId}', function($roomId) {
+                    $user = Auth::user();
+                    $room = \App\Models\ChatRoom::findOrFail($roomId);
+
+                    return response()->json([
+                        'room' => $room,
+                        'user' => $user,
+                        'can_delete' => $room->canBeDeletedBy($user->id)
+                    ]);
+                });
+
+                // Direct delete test route
+                Route::get('/force-delete/{roomId}', function($roomId) {
+                    $user = Auth::user();
+                    $room = \App\Models\ChatRoom::findOrFail($roomId);
+
+                    if ($room->canBeDeletedBy($user->id)) {
+                        $roomName = $room->name;
+                        $room->delete();
+                        return response()->json([
+                            'success' => true,
+                            'message' => "Room '{$roomName}' deleted successfully"
+                        ]);
+                    } else {
+                        return response()->json([
+                            'error' => 'Unauthorized to delete this room'
+                        ], 403);
+                    }
+                });
+            });
 
             //------------------------------- clear_cache --------------------------\\
 

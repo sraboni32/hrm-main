@@ -43,6 +43,8 @@ class CreateEmployeesTable extends Migration {
 			$table->decimal('hourly_rate', 10)->nullable()->default(0.00);
 			$table->decimal('basic_salary', 10)->nullable()->default(0.00);
 			$table->string('employment_type', 192)->nullable()->default('full_time');
+			$table->string('mode', 32)->nullable();
+			$table->decimal('expected_hours', 5, 2)->nullable();
 			$table->date('leaving_date')->nullable();
 			$table->string('marital_status', 192)->nullable()->default('single');
 			$table->string('facebook', 192)->nullable();
@@ -50,8 +52,6 @@ class CreateEmployeesTable extends Migration {
 			$table->string('whatsapp', 192)->nullable();
 			$table->string('twitter', 192)->nullable();
 			$table->string('linkedin', 192)->nullable();
-			$table->string('mode', 32)->nullable()->after('employment_type');
-			$table->decimal('expected_hours', 5, 2)->nullable()->after('mode');
 			$table->timestamps(6);
 			$table->softDeletes();
 		});

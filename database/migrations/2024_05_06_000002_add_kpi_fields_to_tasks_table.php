@@ -14,8 +14,12 @@ class AddKpiFieldsToTasksTable extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->decimal('quality_score', 5, 2)->nullable()->after('note');
-            $table->timestamp('completed_at')->nullable()->after('quality_score');
+            if (!Schema::hasColumn('tasks', 'quality_score')) {
+                $table->decimal('quality_score', 5, 2)->nullable()->after('note');
+            }
+            if (!Schema::hasColumn('tasks', 'completed_at')) {
+                $table->timestamp('completed_at')->nullable()->after('quality_score');
+            }
         });
     }
 
@@ -27,7 +31,12 @@ class AddKpiFieldsToTasksTable extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->dropColumn(['quality_score', 'completed_at']);
+            if (Schema::hasColumn('tasks', 'quality_score')) {
+                $table->dropColumn('quality_score');
+            }
+            if (Schema::hasColumn('tasks', 'completed_at')) {
+                $table->dropColumn('completed_at');
+            }
         });
     }
 } 

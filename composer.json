@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "barryvdh/laravel-dompdf": "^1.0",
+        "beyondcode/laravel-websockets": "^2.0@beta",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -18,6 +19,7 @@
         "laravel/ui": "^3.3",
         "macellan/laravel-zip": "^1.0",
         "nwidart/laravel-modules": "^8.3",
+        "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-permission": "^3.8",
         "stripe/stripe-php": "^8.5",
         "yajra/laravel-datatables-oracle": "~9.0"

@@ -14,7 +14,9 @@ class AddRemainingLeaveColumn extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->integer('remaining_leave')->nullable()->default(0)->after('total_leave');
+            if (!Schema::hasColumn('employees', 'remaining_leave')) {
+                $table->integer('remaining_leave')->nullable()->default(0)->after('total_leave');
+            }
         });
     }
 
@@ -26,7 +28,9 @@ class AddRemainingLeaveColumn extends Migration
     public function down()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->dropColumn('remaining_leave');
+            if (Schema::hasColumn('employees', 'remaining_leave')) {
+                $table->dropColumn('remaining_leave');
+            }
         });
     }
 }
